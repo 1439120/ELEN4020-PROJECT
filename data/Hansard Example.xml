@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0 akomantoso30.xsd" xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">
+<debate name="hansard">
+    <meta>
+        <identification source="ael">
+            <FRBRWork>
+                <FRBRthis value="/akn/ke/minutes/2011-06-10/eng@/!main"/>
+                <FRBRuri value="/akn/ke/minutes/2011-06-10/eng@"/>
+                <FRBRdate date="1979-05-08" name="markup"/>
+                <FRBRauthor href="ael" as="editor"/>
+                <FRBRcountry value="south africa"/>
+            </FRBRWork>
+            <FRBRExpression>
+                <FRBRthis value="/akn/ke/minutes/2011-06-10/eng@/!main.xml"/>
+                <FRBRuri value="/akn/ke/minutes/2011-06-10/eng@.akn"/>
+                <FRBRdate date="1979-05-08" name="markup"/>
+                <FRBRauthor href="ael" as="editor"/>
+                <FRBRlanguage language="en"/>
+            </FRBRExpression>
+            <FRBRManifestation>
+                <FRBRthis value="/akn/ke/minutes/2011-06-10/eng@/!main.xml"/>
+                <FRBRuri value="/akn/ke/minutes/2011-06-10/eng@.akn"/>
+                <FRBRdate date="1979-05-08" name="markup"/>
+                <FRBRauthor href="ael" as="editor"/>
+            </FRBRManifestation>
+        </identification>
+    </meta>
+    <coverPage>
+        <longTitle><p class="REPUBLIC OF SOUTH AFRICA"></p></longTitle>
+        <p class="heading">DEBATES OF THE SENATE (HANSARD)</p>
+        <p><date date="1979-05-08">8 May</date> to <date date="1979-06-22">22 June 1979</date></p>
+        <p><session class="number">THIRD SESSION <quantity refersTo="#numSesion" eId="quantity_2">3</quantity></session></p>
+    </coverPage>
+    <preface>
+        <toc>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">Ministry v</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">Presiding Officers v</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">Senators vii</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">Alphabetical List of Senators according to Provinces ix</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">State of Parties x</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">Index to Proceedings xi</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">Committees of Session xvii</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">§<ref href="SenateHansard1979vol2_local_schema.xml">§ The sign * indicates a translation. The sign †, used subsequently in the same speech, indicates the original language.</ref> Debates Cols. 1-3040</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">Questions and Replies Cols. 1-62</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="1">Indexes (See Appendix at back of Volume)</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="2">Speeches 1</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="2">Subjects 43</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="2">Questions:</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="3">Under name of Senator 61</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="3">Subjects 63</tocItem>
+            <tocItem href="SenateHansard1979vol2_local_schema.xml" level="2">Presiding Officers<ref href="SenateHansard1979vol2_local_schema.xml">*</ref> rulings, statements etc 67</tocItem>
+            </toc>
+        <p title="THE MINISTRY (as at 19 June 1979)">THE MINISTRY (as at 19 June 1979)</p>
+        <p title="CABINET MINISTERS">CABINET MINISTERS</p>
+        <ul>
+            <li>Prime Minister, Minister of Defence and of National Security The Hon. P. W. BOTHA, DM.S., M.P.</li>
+            <li>Minister of Transport The	Hon. S. L. MULLER, M.P.</li>
+            <li>Minister of Labour and of Mines The	Hon. S. P. BOTHA, M.P.</li>
+            <li>Minister of Plural Relations and Development Dr. the Hon. P. G. J. KOORNHOF, M.P.</li>
+            <li>Minister of Agriculture The	Hon. H. SCHOEMAN, M.P.</li>
+            <li>Minister of Health and of Social Welfare and Pensions Dr. the Hon. S. W. VAN DER MERWE, M.P.</li>
+            <li>Minister of Finance (Leader of the House) Senator the Hon. O. P. F. HORWOOD.</li>
+            <li>Minister of Economic Affairs and of Environmental Planning and Energy The Hon. J. C. HEUNIS, M.P.</li>
+            <li>Minister of Justice, of Police and of Prisons. The Hon. J. T. KRUGER, M.P.</li>
+            <li>Minister of Indian Affairs and of Community Development The Hon. S. J. M. STEYN, M.P.</li>
+            <li>Minister of the Interior and Immigration The Hon. A. L. SCHLEBUSCH, M.P.</li>
+            <li>Minister of Water Affairs and of Forestry The Hon. A. J. RAUBENHEIMER, M.P.</li>
+            <li>Minister of Coloured Relations and of Statistics . The Hon.	H. H. SMIT, M.P.</li>
+            <li>Minister of Foreign Affairs The Hon. R. F. BOTHA, M.P.</li>
+            <li>Minister of National Education The Hon. W. A. CRUYWAGEN, M.P.</li>
+            <li>Minister of Posts and Telecommunications and of</li>
+            <li>Sport and Recreation The Hon. F. W. DE KLERK, M.P.</li>
+            <li>Minister of Public Works and of Tourism The Hon. L LE GRANGE, M.P.</li>
+            <li>Minister of Education and Training The Hon. T. N. H. JANSON, M.P.</li>
+                    </ul>
+        </preface>
+    <debateBody>
+        <debateSection name="opening">
+            <heading>TUESDAY, 8 MAY 1979</heading>
+        </debateSection>
+            <prayers>
+                <narrative>
+                    <recordedTime time="1979-05-08T14:30:00">Prayers—14h30.</recordedTime>
+                </narrative>
+            </prayers>
+        <debateSection name="body">
+            <heading>ESTIMATE OF EXPENDITURE, 1979-'80</heading>
+            <p>(Motion to go into Committee—resumed)</p>
+            <speech by="#Swanepoel">
+                <from>Senator <person refersTo="hansard">P. J. SWANEPOEL</person>: <role refersTo="hansard">Mr. President</role></from>
+                    <p>Mr. President, when this debate was adjourned on Thursday, prior to the Great Escape by Government Senators, including the hon. the Minister of Finance, I had commented on a remark made by the hon. the Minister of Finance that Government spending was well under control.</p>
+                <p>I hope that the hon. the Minister’s statement can be applied to all aspects of Government spending and not only in respect of the increase in the rate of Government spending. It should also include the prevention of the misappropriation of public funds in future on projects similar to the recent Information scandal. Some revelations which have been made recently and for which 1 believe satisfactory explanations and replies have not been given have made it plain that there were certain expenses in the past which have as yet not been fully explained to the public of South Africa or to this House or the Other Place. Among others, I am referring here to certain expenditure in respect of a weekly magazine called <i>To The Point</i> which was recently revealed. This is something of which we were not aware until it was revealed recently, first of all by Dr. Connie Mulder and then the subsequent acknowledgment of the expenditure of an amount of some R14 million on this project by the hon. the Minister of Foreign Affairs. It is therefore all the more regrettable that when the hon. the Minister and his colleagues were given the opportunity last Thursday to discuss and to clarify this matter, they saw fit to leave this Chamber. There are several conclusions one can draw from this, but I think the most important one is that Government Senators could neither defend nor explain the facts exposed by the latest revelations and that was why they left the Chamber.</p>
+            </speech>
+            <speech by="#Gouws">
+                <from>Senator <person refersTo="hansard">W. J. GOUWS</person>:</from>
+                <p>Senator W. J. GOUWS: May I put a question to the hon. Senator? Did the hon. Senator not ask me in my office which Orders of the Day would be taken on that day? When I discussed this with him was he not satisfied?</p>
+            </speech>
+            <speech by="#Swanepoel">
+                <from>Senator <person refersTo="hansard">P. J. SWANEPOEL</person>:</from>
+                <p>I was satisfied with the Orders of the Day, Mr. President, but I was not satisfied with the reaction of Senators on the Government side.</p>
+                <p><ref href="#not01">†</ref> The Order Paper had nothing to do with this at all. It is completely irrelevant As far as the hon. Senator Gouws is concerned I can only say that he probably made his greatest contribution to the debates of this session by walking out, because if this is the sort of contribution he makes in a debate as Chief Whip of the Government side, he can just as well leave it.</p>
+                <p>To come back to the walk-out I want to say to Government Senators that rather than defend their case, something they owe the voters of South Africa because they have to defend Government actions . . .</p>
+                <p>The MINISTER OF FINANCE: Everything <i>ad nauseam</i>!</p>
+            </speech>
+            <speech by="#Swanepoel">
+                <from>Senator <person refersTo="hansard">P. J. SWANEPOEL:</person></from>
+                <p><i>Ad nauseam</i>? I am sorry if they see it that way, but if that is so then it is not my fault It is the fault of the Government that this Information scandal is dragging on and on. If it is a case of raising tiie matter here <i>ad nauseam</i>, then the hon. the Minister must shoulder his part of the responsibility for it Instead of facing the music, as the saying goes, they chose another old proverb, viz. to show a clean pair of heels. Then, as the saying goes, they chose the lesser of two evils and in tins case decided that discretion was the better part of valour.</p>
+                <p>The MINISTER OF FINANCE: Tell us about the vendetta.</p>
+            </speech>
+            <speech by="#Swanepoel">
+                <from>Senator <person refersTo="hansard">P. J. SWANEPOEL:</person></from>
+                <p>Which vendetta? This is something about the hon. the Minister which is rather interesting. I have never met anybody in my life who claims to have so many vendettas being carried on against him as this hon. Minister. It is not only the hon. Senator Crook; it is also the Rand Daily Mail, and now it seems as if Dr. Connie Mulder has a vendetta against the hon. the Minister as well. You know, Sir, in psychological jargon they refer to something called a persecution complex, and I think the hon. the Minister should really take stock of himself and answer this question for himself when he is alone. Does he not suffer from something of that nature?</p>
+            </speech>
+            <speech by="#Schoor">
+                <from>Senator <person refersTo="hansard">A. M. VAN SCHOOR:</person></from>
+                <p>He has answered it to the Erasmus Commission.</p>
+            </speech>
+            <speech by="#Swanepoel">
+                <from>Senator <person refersTo="hansard">P. J. SWANEPOEL:</person></from>
+                <p>To the Erasmus Commission? What has he answered to the Erasmus Commission? You know, that hon. Senator sitting at the back there seems to be hard of hearing sometimes. What has he answered to the Erasmus Commission? [Interjections.] But I shall tell the hon. the Minister and the Government Senators on the other side that by running away . . . [Interjections.] ... by running away the Info scandal will not go away. It is going to stick to them like their shadow until such time as they come clean and they give us all the evidence concerned. [Interjections.]</p>
+                <p>I say, Sir, that more and more suspicions are aroused in the minds of more and more people and more and more questions are asked to which fewer and fewer answers are given. I maintain that until such time as everything is properly cleared up, confidence in South Africa’s economy and its future will not be properly restored. I make that claim. Walk-outs contribute nothing to restoring that necessary confidence. Open and genuine debating, on the contrary, will do so. I am not alone in this sort of conviction, Mr. President Had this hon. Senator been able to read, I could have shown him the second leader in <i>Die Beeld</i> on Monday. <i>Die Beeld</i> in its second leader condemned Government Senators for this sort of action. It told them straight that that solved nothing and, if anything, that they had harmed the dignity of this hon. House more than the sort of vendetta they claim is being waged on the part of the hon. Senator Crook. The hon. Senator Gouws should read that leader.</p>
+                <p>* I want to return now to the speech of the hon. the Minister of Finance. [Interjections.] Yes, I can see the hon. the Minister is relieved, very much relieved; he even has a smile on his face. For the first time in a very long time I see he is smiling again.</p>
+                <p>* The MINISTER OF FINANCE: You can talk on any subject you choose.</p>
+                <p>* Senator P. J. SWANEPOEL: Yes, Sir, I shall talk about anything I choose, and that is why I want to come to the speech of the hon. the Minister now. At this stage, Mr. President, I wish to ask for the privilege of the hour.</p>
+                <p>The hon. the Minister of Finance referred indirectly in his speech to certain factors which indicated that confidence in the continued growth of our economy had not been completely restored. That is why I said in my introductory remarks on Thursday that creating a spirit of optimism was not the sole aim of a budget of this kind. But the continuation of that spirit of optimism and the maintenance of its momentum, I think, is the task, more than anything else, of the hon. the Minister of Finance and his department.</p>
+                <p>I say the hon. the Minister referred to the fact that confidence in our economy had not been completely restored. To which factor did he refer as being the most important? He said that a decline in fixed investment and a decline in the level of supplies had become apparent during the past year. He also referred to the fact that the latest increase in the growth rate had taken place mainly as a result of two factors, the first of which was an increase in the value of exports, and the second an increase in the value of gold production.</p>
+                <p>He said further that there was an increase in unemployment, which indicated that particularly the secondary sectors of our economy were still not on the road to growth. That is why I think it is necessary for one to look at the incentives which the hon. the Minister announced in his budget as well as in his speech in this hon. House to see whether when considered in the light of less favourable tendencies they will have the desired results, the effects the hon. the Minister is looking for in the promotion of growth. I think one must evaluate these factors.</p>
+                <p>I want to say to the hon. the Minister that he and I have agreed for many years in regard to one aspect This is an objective for which I have pleaded during the last two or three budgets, namely that one must try to establish growth in the private sector by the encouragement of increased consumer spending.</p>
+            </speech>
+            </debateSection>
+    </debateBody>
+</debate>
+</akomaNtoso>

@@ -1,0 +1,36 @@
+##ELEN4020-LAB2
+
+1. About the application
+------------------------
+
+The code makes use of Phoenix++ MapReduce to perform a number of algorithms.
+A. The top k query
+   Which finds the to k frequently occuring words
+B. The inverted index
+   Which finds the line numbers in which a given list of words
+   are found
+
+2. Note before build
+--------------------
+
+A. The list of words to perform the inverted index is found on the inverted_index
+   dolder and can be modified to the user's desires under given_list.txt
+
+B. The name of the text file for the given list cannot be modified
+
+C. Sample text files for demonstration are in the data folder and the text files should
+   use CRLF format
+
+4. Building and runnig the application
+--------------------------------------
+cd to ELEN4020-LAB3
+
+To build the application: run 'make' on the terminal
+
+To run the program: for word count
+                     time -p ./word_count/word_count data/(textfile)
+
+                     for inverted index
+                    time -p ./inverted_index/inverted_index data/(textfile)
+
+
