@@ -33,18 +33,14 @@ include Defines.mk
 
 default: all
 
-all: $(TARGET) xm #ii
+all: $(TARGET) xm
 
 $(TARGET):
 	@$(MAKE) -C $(SRC_DIR) --no-print-directory
-
-# ii:
-# 	@$(MAKE) -C $(II_DIR) --no-print-directory
 
 xm:
 	@$(MAKE) -C $(XML) --no-print-directory
 
 clean:
 	@$(MAKE) -C $(SRC_DIR) clean --no-print-directory
-	# @$(MAKE) -C $(II_DIR) clean --no-print-directory
 	@$(MAKE) -C $(XML) clean --no-print-directory

@@ -47,9 +47,9 @@ class map{
 };
 
 //defines the days
-struct dataset{
-    index day_;
-    std::vector <map > pair_;
-};
+// struct dataset{
+//     index day_;
+//     std::vector <map > pair_;
+// };
 
 #endif
