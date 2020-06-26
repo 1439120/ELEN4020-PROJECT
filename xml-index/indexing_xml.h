@@ -5,17 +5,24 @@
 #include <fcntl.h>
 #include <string.h>
 #include <ctype.h>
+
+#include <stdio.h> 
 #include <algorithm>
+#include <sys/types.h>
+#include <cstdint>
+#include <vector>
+#include "pthread.h"
 
 #include <stdio.h>
-#include "definitions.h"
 
 // Holds the location of the debate and the debate name
 struct Index{
     uint64_t start_;
     uint64_t end_;
     char* dname_;
+    char* dheading_;
     uint64_t nlen_;
+    std::vector <char* > speakers_;
 
     bool operator==(Index const& other) const {
         return strcmp(dname_, other.dname_) == 0;
@@ -44,21 +51,26 @@ class Debates{
         char* data_;
         uint64_t datasize;
         const char* DEBATETAG = "<debateSection name=\"opening\">";
+        //const char* SPEAKERTAG = "<person refersTo=\"hansard\">";
 
     private:
         void CreateIndex(FILE* f);
         char* findname(uint64_t start, uint64_t end){
-            char* dname = (char *)malloc (end + 1 - start);
+            char* dname = (char *)malloc ((end-start + 1)*sizeof(char));
             for(uint64_t i= start; i < end; i++) dname[i-start] = data_[i];
             dname[end-start] = '\0';
             return dname;
         }
+        void FindHeadingSpeaker();
+        const char* SPEAKERTAG = "<person refersTo=\"hansard\">";
+        const char* HEADINGTAG = "<heading>";
 };
 
 Debates::~Debates(){
     free(data_);
     for(uint64_t i = 0; i < debate_.size(); i++){
         free(debate_.at(i).dname_);
+        free(debate_.at(i).dheading_);
     }
 }
 
@@ -93,8 +105,12 @@ void Debates::CreateIndex(FILE* f){
     data_ = (char *)malloc (datasize);
 
     short dcount = 0;  //for finding if the tag is for debate name
+    short hcount = 0; // for finding the tag for heading
     //these variables are for taking the debates names
     uint64_t marks = 0;
+    uint64_t hstart = 0;
+    uint64_t hend = 0;
+    bool hkey = false;
     //start reading the file
     for (uint64_t i = 0; i < datasize; i++){
         data_[i] = fgetc(f);
@@ -119,11 +135,47 @@ void Debates::CreateIndex(FILE* f){
             }
             marks = 0;
             debate_.push_back(dbt);
+            hkey =  true;
+            }
+            
+        }
+
+        if(hkey){
+            
+            if(data_[i] == HEADINGTAG[hcount])
+                hcount++;
+            else
+                hcount = 0;
+                
+            if(hcount >= 9)
+                hstart = i + 1;
+
+            if(hstart > 0)
+                if(data_[i] == '<') hend = i;
+
+            if(hend > 0){
+                debate_.at(debate_.size() - 1).dheading_ = findname(hstart, hend);
+                hend = 0;
+                hstart = 0;
+                hkey = false;
             }
         }
 
     }
 
+}
+
+void Debates::FindHeadingSpeaker(){
+    // #pragma omp parallel
+    // #pragma omp for
+    for(uint64_t i = 0; i < debate_.size(); i++) {
+
+        // uint64_t hstart = 0;    // mark the start of the heading
+        // uint64_t sstart = 0;    //
+        for(uint64_t j = debate_.at(j).start_; j < debate_.size(); j++){
+            
+        }
+    }
 }
 
 #endif

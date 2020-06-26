@@ -9,7 +9,10 @@ int main(int argc, char* argv[]) {
 
     HashTable query(big_data);
 
-    query.DisplayDebatesN();
+    char *v = "bill";
 
+    printf("main inpt %15s with length %d\n",v);
+    
+    query.findDebateName(v);
 return 0;
 }
