@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 
     char *v = "bill";
 
-    printf("main inpt %15s with length %d\n",v);
+    printf("main inpt %15s with length\n",v);
     
     query.findDebateName(v);
 return 0;

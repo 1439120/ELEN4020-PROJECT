@@ -21,6 +21,13 @@ class HashTable: public Debates{
             }
             for(uint64_t c = 0; c < HashMap[_key % debate_.size()].size(); c++){
                 printf(" %15s \n",HashMap[_key % debate_.size()].at(c).dheading_);
+                printf("-------------------------------------------------------");
+                for (auto& x: HashMap[_key % debate_.size()].at(c).speakers_) {
+                    //std::cout << x.first << ": " << << '\n';
+                    printf("%15s", x.second );
+                }
+                printf("-------------------------------------------------------");
+                printf("\n");
             }      
         }
 
@@ -29,13 +36,6 @@ class HashTable: public Debates{
         std::unordered_map< int, Index> list_;
         std::vector < std::vector< Index>> HashMap;
         bool HashGivenData();
-        int convert(char* dname, uint64_t len){
-            int sum = -1;
-            for(uint64_t i = 0; i < len; i++){
-                sum += (int) dname[i];
-            }
-            return sum;
-        }
 };
 
 // use the debates constructor

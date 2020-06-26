@@ -12,7 +12,7 @@
 #include <cstdint>
 #include <vector>
 #include "pthread.h"
-
+#include <map>
 #include <stdio.h>
 
 // Holds the location of the debate and the debate name
@@ -22,10 +22,11 @@ struct Index{
     char* dname_;
     char* dheading_;
     uint64_t nlen_;
-    std::vector <char* > speakers_;
+    //std::vector <char* > speakers_;
+    std::map<char* ,char* > speakers_;
 
     bool operator==(Index const& other) const {
-        return strcmp(dname_, other.dname_) == 0;
+        return strcmp(dheading_, other.dheading_) == 0;
     }
 
     Index& operator = (Index& other){
@@ -33,6 +34,7 @@ struct Index{
         end_ = other.end_;
         dname_ = other.dname_;
         nlen_ = other.nlen_;
+        speakers_ = other.speakers_;
     }
 
 };
@@ -50,8 +52,13 @@ class Debates{
         std::vector <Index> debate_;
         char* data_;
         uint64_t datasize;
-        const char* DEBATETAG = "<debateSection name=\"opening\">";
-        //const char* SPEAKERTAG = "<person refersTo=\"hansard\">";
+        int convert(char* dname, uint64_t len){
+            int sum = -1;
+            for(uint64_t i = 0; i < len; i++){
+                sum += (int) dname[i];
+            }
+            return sum;
+        }
 
     private:
         void CreateIndex(FILE* f);
@@ -61,8 +68,9 @@ class Debates{
             dname[end-start] = '\0';
             return dname;
         }
-        void FindHeadingSpeaker();
+        void AddDebateSpeakers();
         const char* SPEAKERTAG = "<person refersTo=\"hansard\">";
+        const char* DEBATETAG = "<debateSection name=\"opening\">";
         const char* HEADINGTAG = "<heading>";
 };
 
@@ -97,6 +105,8 @@ Debates::Debates(const char* fname){
     CreateIndex(input_f);
 
     fclose(input_f);
+
+    AddDebateSpeakers();
 }
 
 void Debates::CreateIndex(FILE* f){
@@ -165,17 +175,36 @@ void Debates::CreateIndex(FILE* f){
 
 }
 
-void Debates::FindHeadingSpeaker(){
-    // #pragma omp parallel
-    // #pragma omp for
-    for(uint64_t i = 0; i < debate_.size(); i++) {
+void Debates::AddDebateSpeakers(){
 
-        // uint64_t hstart = 0;    // mark the start of the heading
-        // uint64_t sstart = 0;    //
-        for(uint64_t j = debate_.at(j).start_; j < debate_.size(); j++){
-            
+    //#pragma omp parallel for collapse(2)
+    for(uint64_t i = 0; i < debate_.size(); i++) {
+        // mark the start of the speaker
+        //uint64_t send = 0;    // mark the end of the heading
+        uint64_t sstart = 0;    //
+        uint64_t counter = 0;
+        //if(i == 0)
+        for(uint64_t j = debate_.at(i).start_; j < debate_.at(i).end_; j++){
+            if(data_[j] == SPEAKERTAG[counter])
+                counter++;
+            else
+                counter = 0;
+
+            if(counter == 27)
+                sstart = j;
+
+            if(sstart > 0 && data_[j] == '<'){
+                auto speakername = findname(sstart, j);
+                sstart = 0;
+
+                // I need to make sure the names are not repeated
+                if(debate_.at(i).speakers_.count(speakername) == 0)
+                    debate_.at(i).speakers_.insert(std::pair<char*, char *>(speakername, speakername));
+            }
+
         }
     }
+    
 }
 
 #endif
