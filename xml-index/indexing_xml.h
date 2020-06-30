@@ -23,7 +23,7 @@ struct Index{
     char* dheading_;
     uint64_t nlen_;
     //std::vector <char* > speakers_;
-    std::map<int ,char* > speakers_;
+    std::map<char* ,char* > speakers_;
 
     bool operator==(Index const& other) const {
         return strcmp(dheading_, other.dheading_) == 0;
@@ -73,6 +73,18 @@ class Debates{
         const char* DEBATETAG = "<debateSection name=\"opening\">";
         const char* HEADINGTAG = "<heading>";
 };
+
+bool isFound(std::map<char* ,char* > speakers, char* sname){
+    
+    if(speakers.size() == 0)return false;
+
+    for (auto& x: speakers) {
+        if(strcmp(sname, x.second) == 0)return true;
+            //printf("%15s ", x.second );
+    }
+
+    return false;
+}
 
 Debates::~Debates(){
     free(data_);
@@ -201,15 +213,16 @@ void Debates::AddDebateSpeakers(){
                 while(speakername[n] != '\0') n++;
                 int key = convert(speakername, n);
 
-                printf(" %15s ",speakername);
+                //printf(" %15s ",speakername);
                 // I need to make sure the names are not repeated
-                if(debate_.at(i).speakers_.count(key) == 0)
-                    debate_.at(i).speakers_.insert(std::pair<int, char *>(key, speakername));
+                if(!isFound(debate_.at(i).speakers_, speakername))
+                    debate_.at(i).speakers_.insert(std::pair<char *, char *>(speakername, speakername));
             }
 
         }
     }
     
 }
+
 
 #endif

@@ -56,6 +56,18 @@ HashTable::~HashTable(){
 
 }
 
+bool isDFound(std::vector <Index> debates, Index dname){
+    
+    if(debates.size() == 0)return false;
+
+    for (auto& x: debates) {
+        if(x == dname)return true;
+            //printf("%15s ", x.second );
+    }
+
+    return false;
+}
+
 // Before we search anything on the hash table, we need to hash the data on indexing_xml
 bool HashTable::HashGivenData(){
     if(debate_.empty())return false;
@@ -66,10 +78,14 @@ bool HashTable::HashGivenData(){
         // convert the given debate name to a key
         size_t n1 = 0;
 	    while(debate_.at(i).dheading_[n1] != '\0') n1++;
+
         int _key = convert(debate_.at(i).dheading_, n1);
+
+        if(isDFound(HashMap[_key % debate_.size()], debate_.at(i))) continue;
+
         HashMap[_key % debate_.size()].push_back(debate_.at(i)); // put the debate name in map according to the key
 
-        std::map<int, char*>::iterator it = debate_.at(i).speakers_.begin();
+        std::map<char*, char*>::iterator it = debate_.at(i).speakers_.begin();
         for (; it != debate_.at(i).speakers_.end(); ++it){
             size_t n = 0;
 	        while(it->second[n] != '\0')n++;
@@ -99,44 +115,36 @@ std::vector < Index> HashTable::DebatesSpeakerFound(char* sname){
     printf("size of the found speakers %d %d\n", temp.size(), HashMapS[key % debate_.size()].size());
 
     for(uint64_t i = 0; i < HashMapS[key % debate_.size()].size(); i++){
-        // for(int j = 0; j < HashMapS[key].at(i).speakers_.size(); j++){
-            
-        //     if(HashMapS[key].at(i).speakers_.at(j) == sname){
-        //         temp.push_back(HashMapS[key].at(i));
-        //         break;
-        //     }
-        // }
-        std::vector < Index> temp;
-        std::map<int, char*>::iterator it = HashMapS[key % debate_.size()].at(i).speakers_.find(key);
-        if(it == HashMapS[key % debate_.size()].at(i).speakers_.end()){ 
-            printf("Name not found\n");
-        }else {
-            printf("Found it\n");
-            if(it->second != sname) HashMapS[key % debate_.size()].at(i).speakers_.erase(it);
-            Index krk = HashMapS[key % debate_.size()].at(i);
-            temp.push_back(krk);
+
+        for (auto& x: HashMapS[key % debate_.size()].at(i).speakers_) {
+            //std::cout << x.first << ": " << << '\n';
+            if(strcmp(sname, x.second) == 0){
+                temp.push_back(HashMapS[key % debate_.size()].at(i));
+                break;
+            }
+                //printf("%15s ", x.second );
         }
     }
 
     printf("size of the found speakers %d %d\n", temp.size(), HashMapS[key % debate_.size()].size());
 
-    // if(temp.empty()){
-    //     printf("no matching debate found\n");
-    //     return temp;
-    // }
+    if(temp.empty()){
+        printf("no matching debate found\n");
+        return temp;
+    }
 
-    for(uint64_t c = 0; c < HashMapS[key % debate_.size()].size(); c++){
-        printf(" %15s \n",HashMapS[key % debate_.size()].at(c).dheading_);
-        printf("-------------------------------------------------------");
-        for (auto& x: HashMapS[key % debate_.size()].at(c).speakers_) {
+    for(uint64_t c = 0; c < temp.size(); c++){
+        printf(" %15s \n",temp.at(c).dheading_);
+        //printf("-------------------------------------------------------");
+        for (auto& x: temp.at(c).speakers_) {
             //std::cout << x.first << ": " << << '\n';
-            if(x.second != sname)continue;
-            printf("%15s ", x.second );
+            if(strcmp(sname, x.second) != 0)continue;
+                printf("%15s ", x.second );
         }
-        printf("-------------------------------------------------------");
-        printf("\n");
+        printf("\n-------------------------------------------------------");
+        printf("\n\n");
     }      
-    return HashMapS[key % debate_.size()];
+    return temp;
 }
 
 // std::vector<Index> operator+(const std::vector<Index>& v1, const std::vector<Index>& v2)

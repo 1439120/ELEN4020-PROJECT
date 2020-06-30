@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
     HashTable query(big_data);
 
     const char *v = "bill";
-
+ 
     printf("main inpt %15s with length\n",v);
     
     //query.findDebateName(v);
