@@ -23,7 +23,7 @@ struct Index{
     char* dheading_;
     uint64_t nlen_;
     //std::vector <char* > speakers_;
-    std::map<char* ,char* > speakers_;
+    std::map<int ,char* > speakers_;
 
     bool operator==(Index const& other) const {
         return strcmp(dheading_, other.dheading_) == 0;
@@ -194,12 +194,17 @@ void Debates::AddDebateSpeakers(){
                 sstart = j;
 
             if(sstart > 0 && data_[j] == '<'){
-                auto speakername = findname(sstart, j);
+                auto speakername = findname(sstart+1, j);
                 sstart = 0;
 
+                size_t n = 0;
+                while(speakername[n] != '\0') n++;
+                int key = convert(speakername, n);
+
+                printf(" %15s ",speakername);
                 // I need to make sure the names are not repeated
-                if(debate_.at(i).speakers_.count(speakername) == 0)
-                    debate_.at(i).speakers_.insert(std::pair<char*, char *>(speakername, speakername));
+                if(debate_.at(i).speakers_.count(key) == 0)
+                    debate_.at(i).speakers_.insert(std::pair<int, char *>(key, speakername));
             }
 
         }

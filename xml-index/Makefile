@@ -44,10 +44,10 @@ default: all
 all: $(PROGS)
 
 xml-search-main: $(WC_OBJS) $(LIB_DEP)
-	$(CXX) $(CFLAGS) -o $@ $(WC_OBJS) $(LIBS)
+	mpic++ $(CFLAGS) -o $@ $(WC_OBJS) $(LIBS)
 
 %.o: %.cpp
-	$(CXX) $(CFLAGS) -c $< -o $@ -I$(HOME)/$(INC_DIR)
+	mpic++ $(CFLAGS) -c $< -o $@ -I$(HOME)/$(INC_DIR)
 
 clean:
 	rm -f $(PROGS) $(WC_OBJS)
