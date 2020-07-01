@@ -9,32 +9,14 @@ class HashTable: public Debates{
     public:
         HashTable(const char* fname);
         ~HashTable();
-        void findDebateName(char *dname){
-            size_t n = 0;
-	        while(dname[n] != '\0')n++;
-            int _key = convert(dname, n);
-
-            if(HashMap[_key % debate_.size()].empty()){
-                printf("no matching debate found");
-                return;
-            }
-            for(uint64_t c = 0; c < HashMap[_key % debate_.size()].size(); c++){
-                printf(" %15s \n",HashMap[_key % debate_.size()].at(c).dheading_);
-                printf("-------------------------------------------------------");
-                for (auto& x: HashMap[_key % debate_.size()].at(c).speakers_) {
-                    //std::cout << x.first << ": " << << '\n';
-                    printf("%15s", x.second );
-                }
-                printf("-------------------------------------------------------");
-                printf("\n");
-            }      
+        void findDebateName(char *dname){ 
         }
 
         void DebatesSpeakerAppears(char* dname); // we need to search through every debate
         // the arguement should be a list of speakers
         // can be one arguement and we will keep on accepting speaker names
         std::vector < Index> SpeakerDebate(); // for finding debates where speaker appears
-        std::vector < Index> DebatesSpeakerFound(char* sname); // for finding speakers in ccommon debates
+        std::vector < char *> DebatesSpeakerFound(const char* sname); // for finding speakers in ccommon debates
 
     private:
         uint64_t row_size;
@@ -92,6 +74,7 @@ bool HashTable::HashGivenData(){
             int key = convert(it->second, n);
             HashMapS[key % debate_.size()].push_back(debate_.at(i));
         }
+        
     }
 
     return true;
@@ -104,55 +87,51 @@ void HashTable::DebatesSpeakerAppears(char* dname){
     
 }
 
-std::vector < Index> HashTable::DebatesSpeakerFound(char* sname){
-    size_t n = 0;
-    // printf("before while loop\n");
-    while(sname[n] != '\0') n++;
-    printf("sixe pf the input is %d\n", n);
-    int key = convert(sname, n);
-    std::vector < Index> temp;
+void remove(std::vector<char*> &v)
+{
+	auto end = v.end();
+	for (auto it = v.begin(); it != end; ++it) {
+		end = std::remove(it + 1, end, *it);
+	}
 
-    printf("size of the found speakers %d %d\n", temp.size(), HashMapS[key % debate_.size()].size());
+	v.erase(end, v.end());
+}
+
+std::vector < char *> HashTable::DebatesSpeakerFound(const char* sname){
+    size_t n = 0;
+    while(sname[n] != '\0') n++;
+    int key = convert(sname, n);
+    std::vector < char* > temp;
 
     for(uint64_t i = 0; i < HashMapS[key % debate_.size()].size(); i++){
 
         for (auto& x: HashMapS[key % debate_.size()].at(i).speakers_) {
-            //std::cout << x.first << ": " << << '\n';
+
             if(strcmp(sname, x.second) == 0){
-                temp.push_back(HashMapS[key % debate_.size()].at(i));
-                break;
+                    temp.push_back(HashMapS[key % debate_.size()].at(i).dheading_);
+                    break;
             }
-                //printf("%15s ", x.second );
+            
         }
     }
-
-    printf("size of the found speakers %d %d\n", temp.size(), HashMapS[key % debate_.size()].size());
 
     if(temp.empty()){
         printf("no matching debate found\n");
         return temp;
     }
 
-    for(uint64_t c = 0; c < temp.size(); c++){
-        printf(" %15s \n",temp.at(c).dheading_);
-        //printf("-------------------------------------------------------");
-        for (auto& x: temp.at(c).speakers_) {
-            //std::cout << x.first << ": " << << '\n';
-            if(strcmp(sname, x.second) != 0)continue;
-                printf("%15s ", x.second );
+    for(int i = 0; i < temp.size(); i++){
+        for(int k = 0; k < temp.size(); k++){
+            if(i == k) continue;
+            else{
+
+            }
         }
-        printf("\n-------------------------------------------------------");
-        printf("\n\n");
-    }      
+    }
+
+    //remove(temp);
+  
     return temp;
 }
 
-// std::vector<Index> operator+(const std::vector<Index>& v1, const std::vector<Index>& v2)
-// {
-//     if(v1.empty()) return v2;
-//     else if(v2.empty()) return v1;  
-//     v1.insert(v1.end(), v2.begin(), v2.end());
-//     std::vector<Index> res (v1.begin(), v2.end());
-//     return res;
-// }
 #endif

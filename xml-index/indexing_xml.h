@@ -29,12 +29,14 @@ struct Index{
         return strcmp(dheading_, other.dheading_) == 0;
     }
 
-    Index& operator = (Index& other){
-        start_ = other.start_;
-        end_ = other.end_;
-        dname_ = other.dname_;
-        nlen_ = other.nlen_;
-        speakers_ = other.speakers_;
+    Index operator = (Index& other){
+        Index ind;
+        ind.start_ = other.start_;
+        ind.end_ = other.end_;
+        ind.dname_ = other.dname_;
+        ind.nlen_ = other.nlen_;
+        ind.speakers_ = other.speakers_;
+        return ind;
     }
 
 };
@@ -52,7 +54,7 @@ class Debates{
         std::vector <Index> debate_;
         char* data_;
         uint64_t datasize;
-        int convert(char* dname, uint64_t len){
+        int convert(const char* dname, uint64_t len){
             int sum = -1;
             for(uint64_t i = 0; i < len; i++){
                 sum += (int) dname[i];
@@ -122,7 +124,7 @@ Debates::Debates(const char* fname){
 }
 
 void Debates::CreateIndex(FILE* f){
-    printf("The size of the data is %ld \n",datasize);
+    //printf("The size of the data is %ld \n",datasize);
     // Allocating memory to store data in file
     data_ = (char *)malloc (datasize);
 
@@ -209,11 +211,6 @@ void Debates::AddDebateSpeakers(){
                 auto speakername = findname(sstart+1, j);
                 sstart = 0;
 
-                size_t n = 0;
-                while(speakername[n] != '\0') n++;
-                int key = convert(speakername, n);
-
-                //printf(" %15s ",speakername);
                 // I need to make sure the names are not repeated
                 if(!isFound(debate_.at(i).speakers_, speakername))
                     debate_.at(i).speakers_.insert(std::pair<char *, char *>(speakername, speakername));
