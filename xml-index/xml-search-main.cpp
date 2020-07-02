@@ -1,39 +1,80 @@
 #include <stdio.h> 
 #include <ctype.h>
+#include <iostream>
+#include <time.h>
 #include "hash_table.h"
 #include "mpi.h"
+
 
 void SpeakerCorrespondingDebates(int my_rank, int p, HashTable& query, std::vector < char*> sname);
 void DebatesCorrespondingSpeakers(int my_rank, int p, HashTable& query, std::vector < char*> sname);
 
 int main(int argc, char* argv[]) {
 
-    const char *small_data = "./data/Hansard-Example.xml";
-    const char *big_data = "./data/SenateHansard1979vol2.xml";
+    const char *small_data = "../data/Hansard-Example.xml";
+    const char *big_data = "../data/SenateHansard1979vol2.xml";
+    int flag =0;
+
+    clock_t start_t,end_t;
+    double total;
 
     HashTable query(big_data);
 
     //const char *v = "LIQUOR AMENDMENT BILL";
  
     //printf("main inpt %15s with length\n",v);
-    
-    //query.SpeakersInDebate(v);
-    //const char *n = "J. L. HORAK";
-    //std::vector < char*> sname = {"L. E. D. WINCHESTER","A. J. KOCH","W. T. WEBBER"};
-    //query.DebatesSpeakerFound(n);
+    printf("1. create index\n");
+    printf("2. search index for debates in which two speakers participated\n");
+    printf("3. Speakers that participated in two debates\n");
 
-    std::vector < char*> dname = {"LIQUOR AMENDMENT BILL","ESTIMATE OF EXPENDITURE, 1979-&#x2019;80","FINANCIAL INSTITUTIONS AMENDMENT BILL"};
+    std::cin>>flag;
+    if(flag==1){
+
+    start_t = clock();
+    //deabtes sections
+    std::vector < char*> indx = {"bill","suspension","estimate","debates","report","vacancy",
+    "election","affirmation","consideration","assembly","absence","hours","address","painting",
+    "personal","appendix","rulings","index"};
+
+    for(int i=0;i<indx.size();i++){
+        
+        query.findDebateName(indx[i]);
+    }
+
+    }else if(flag==2){
+    start_t = clock();
+    std::vector < char*> dname = {"LIQUOR AMENDMENT BILL","FINANCIAL INSTITUTIONS AMENDMENT BILL"};
+
+        int my_rank, p; // process rank and number of processes 
+
+        MPI_Init(&argc, &argv); 
+        MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
+        MPI_Comm_size(MPI_COMM_WORLD, &p);
+
+        DebatesCorrespondingSpeakers(my_rank, p, query,dname);
+        MPI_Finalize(); // shuts down MPI
+
+    }else if(flag==3){
+    start_t = clock();
+    std::vector < char*> sname = {"L. E. D. WINCHESTER","A. J. KOCH","W. T. WEBBER"};
 
     int my_rank, p; // process rank and number of processes 
 
-    MPI_Init(&argc, &argv); 
-    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
-    MPI_Comm_size(MPI_COMM_WORLD, &p);
+        MPI_Init(&argc, &argv); 
+        MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
+        MPI_Comm_size(MPI_COMM_WORLD, &p);
 
-    //SpeakerCorrespondingDebates(my_rank, p, query,sname);
-    DebatesCorrespondingSpeakers(my_rank, p, query,dname);
+        SpeakerCorrespondingDebates(my_rank, p, query,sname);
+        MPI_Finalize(); // shuts down MPI
+    }
+    //query.SpeakersInDebate(v);
+    //const char *n = "J. L. HORAK";
     
-    MPI_Finalize(); // shuts down MPI
+    //query.DebatesSpeakerFound(n);
+
+    end_t = clock();
+    total = (double)(end_t - start_t)/CLOCKS_PER_SEC;
+    printf(" Total time taken by CPU: %f \n",total);
     
 return 0;
 }

@@ -9,13 +9,13 @@ class HashTable: public Debates{
     public:
         HashTable(const char* fname);
         ~HashTable();
-        // void findDebateName(char *dname){ 
-        // }
+         void findDebateName(char *dname){ 
+        }
 
-        //void DebatesSpeakerAppears(char* dname); // we need to search through every debate
-        // the arguement should be a list of speakers
-        // can be one arguement and we will keep on accepting speaker names
-        //std::vector < Index> SpeakerDebate(); // for finding debates where speaker appears
+        void DebatesSpeakerAppears(char* dname); // we need to search through every debate
+        //the arguement should be a list of speakers
+        //can be one arguement and we will keep on accepting speaker names
+        std::vector < Index> SpeakerDebate(); // for finding debates where speaker appears
         std::vector < char *> DebatesSpeakerFound(const char* sname); // for finding speakers in ccommon debates
         std::vector < char *> SpeakersInDebate(const char* sname);
 
