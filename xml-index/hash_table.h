@@ -34,7 +34,7 @@ class HashTable: public Debates{
     private:
         uint64_t row_size;
         std::unordered_map< int, Index> list_;
-        std::vector < std::vector< Index>> HashMap;
+        std::vector < std::vector< Index> > HashMap;
         bool HashGivenData();
 };
 
@@ -60,7 +60,7 @@ bool HashTable::HashGivenData(){
     for(uint64_t i = 0; i < debate_.size(); i++) {
         int _key = convert(debate_.at(i).dname_, debate_.at(i).nlen_);
         HashMap[_key % debate_.size()].push_back(debate_.at(i));
-        list_.insert ({_key, debate_.at(i)});
+        
     }
 
     return true;
