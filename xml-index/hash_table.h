@@ -9,14 +9,15 @@ class HashTable: public Debates{
     public:
         HashTable(const char* fname);
         ~HashTable();
-        void findDebateName(char *dname){ 
-        }
+        // void findDebateName(char *dname){ 
+        // }
 
-        void DebatesSpeakerAppears(char* dname); // we need to search through every debate
+        //void DebatesSpeakerAppears(char* dname); // we need to search through every debate
         // the arguement should be a list of speakers
         // can be one arguement and we will keep on accepting speaker names
-        std::vector < Index> SpeakerDebate(); // for finding debates where speaker appears
+        //std::vector < Index> SpeakerDebate(); // for finding debates where speaker appears
         std::vector < char *> DebatesSpeakerFound(const char* sname); // for finding speakers in ccommon debates
+        std::vector < char *> SpeakersInDebate(const char* sname);
 
     private:
         uint64_t row_size;
@@ -80,13 +81,6 @@ bool HashTable::HashGivenData(){
     return true;
 }
 
-void HashTable::DebatesSpeakerAppears(char* dname){
-    //done with this
-    // I will hash the name and find a vector
-    // the vector should be read in parallel using MPI// vector of debates which each have a bmap of speakers
-    
-}
-
 void remove(std::vector<char*> &v)
 {
 	auto end = v.end();
@@ -120,17 +114,51 @@ std::vector < char *> HashTable::DebatesSpeakerFound(const char* sname){
         return temp;
     }
 
-    for(int i = 0; i < temp.size(); i++){
-        for(int k = 0; k < temp.size(); k++){
-            if(i == k) continue;
-            else{
+    // for(int i = 0; i < temp.size(); i++){
+    //     for(int k = 0; k < temp.size(); k++){
+    //         if(i == k) continue;
+    //         else{
 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     //remove(temp);
   
+    return temp;
+}
+
+std::vector < char *> HashTable::SpeakersInDebate(const char* sname){
+    size_t n = 0;
+    while(sname[n] != '\0') n++;
+    int key = convert(sname, n);
+    std::vector < char* > temp;
+
+    for(uint64_t i = 0; i < HashMap[key % debate_.size()].size(); i++){
+
+        // if(strcmp(sname, HashMap[key % debate_.size()].at(i).dheading_) != 0){
+        //     printf("%15s\n", HashMap[key % debate_.size()].at(i).dheading_);
+        //     continue;
+        //     }
+
+        for (auto& x: HashMap[key % debate_.size()].at(i).speakers_) {
+            //if(strcmp(sname, x.second) == 0){
+            temp.push_back(x.second);
+            //}   
+        }
+    }
+
+     if(temp.empty()){
+        printf("no correspomding speakers to that debate\n");
+        return temp;
+    }
+
+    remove(temp);
+
+    // printf("***********************\n");
+    // for(int i = 0; i < temp.size(); i++) printf("%15s\n", temp.at(i));
+    // printf("***********************\n");
+
     return temp;
 }
 
