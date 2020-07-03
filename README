@@ -28,9 +28,6 @@ cd to ELEN4020-LAB3
 To build the application: run 'make' on the terminal
 
 To run the program: for word count
-                     time -p ./word_count/word_count data/(textfile)
-
-                     for inverted index
-                    time -p ./inverted_index/inverted_index data/(textfile)
+                     ./xml-search-main
 
 
