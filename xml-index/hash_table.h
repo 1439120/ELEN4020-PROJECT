@@ -10,7 +10,6 @@ class HashTable: public Debates{
         HashTable(const char* fname);
         ~HashTable();
        void findDebateName(char *dname){
-            printf("the size is %ld \n",list_.size());
             size_t n = 0;
 	        while(dname[n] != '\0')n++;
             int _key = convert(dname, n);
@@ -29,6 +28,50 @@ class HashTable: public Debates{
                 printf("-------------------------------------------------------");
                 printf("\n");
             }      
+        }
+
+        void DisplayingAllDebates(){
+            for(uint64_t c = 0; c < debate_.size(); c++){
+                printf("-------------------------------------------------------\n");
+                printf("%15s - %15s\n",debate_.at(c).dname_, debate_.at(c).dheading_);
+
+                std::map<char*, char*>::iterator it = debate_.at(c).speakers_.begin();
+                for (; it != debate_.at(c).speakers_.end(); ++it){
+                    printf("*** %15s ***", it->second);
+                }
+                printf("-------------------------------------------------------");
+                printf("\n");
+            }  
+        }
+
+        std::vector < char*> DataInFile(FILE* fptr, char* qfile){
+            
+            std::vector < char*> dname;
+            if ((fptr = fopen(qfile, "r")) == NULL) {
+            printf("Error! opening file\n");
+            // Program exits if file pointer returns NULL.
+            exit(1);
+            }
+
+            // do{
+            // // int n = 0;
+            // // while(c[n] != '\0')n++;
+            // // printf("Data from the file: %s size %d\n", c, n);
+            // char *c = (char *)malloc (100);
+            // dname.push_back(c);
+            // //printf("%15s",dname.at(dname.size() - 1));
+            // }while (fgets (c, 100, fptr) != NULL);
+            while (true)
+            {
+                char *c = (char *)malloc (100);
+                if(fgets (c, 100, fptr) != NULL){
+                    dname.push_back(c);
+                }else{
+                    break;
+                }
+            }
+            
+            return dname;
         }
 
         void DebatesSpeakerAppears(char* dname); // we need to search through every debate

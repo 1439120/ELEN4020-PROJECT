@@ -10,13 +10,53 @@ void SpeakerCorrespondingDebates(int my_rank, int p, HashTable& query, std::vect
 void DebatesCorrespondingSpeakers(int my_rank, int p, HashTable& query, std::vector < char*> sname);
 
 int main(int argc, char* argv[]) {
-    int flag =0;
 
     if (argv[1] == NULL)
     {
-        printf("You must specify an XML file to open when running the program\n", argv[0]);
+        printf("You must specify an XML file to open when running the program\n", argv[1]);
         exit(1);
     }
+
+    char *flag = argv[2];
+
+    //printf("%c\n", flag[0]);
+
+    char *qfile;
+    if (!(flag[0] == '1' || flag[0] == '2'))
+    {
+            printf("You must specify the query u want to make after the name of the file\n");
+            printf("1. Finding debates that corresponds to the speakers provided\n");
+            printf("2. Finding common speakers in the debates provided\n\n\n");
+            exit(1);
+    }
+
+    if(flag[0] == '1')
+        qfile = "./debates.txt";
+    else
+        qfile = "./speakers.txt";
+
+//    char c[100];
+    FILE *fptr;
+    // if ((fptr = fopen(qfile, "r")) == NULL) {
+    //     printf("Error! opening file\n");
+    //     // Program exits if file pointer returns NULL.
+    //     exit(1);
+    // }
+
+    //scanf("%s %d", fptr, &c);
+ 
+    //printf("\n\n");
+    // reads text until newline is encountered
+    //fscanf(fptr, "%[^\n]", c);
+    
+    //fclose(fptr);
+    
+    //std::vector < char*> dname;
+
+
+    
+
+    //printf("size = %ld", dname.size());
 
     const char *fname = argv[1];
 
@@ -24,58 +64,45 @@ int main(int argc, char* argv[]) {
     double total;
 
     HashTable query(fname);
-
-    //const char *v = "LIQUOR AMENDMENT BILL";
  
-    //printf("main inpt %15s with length\n",v);
-    printf("1. create index\n");
-    printf("2. search index for debates in which two speakers participated\n");
-    printf("3. Speakers that participated in two debates\n");
+    //printf("1. create index\n");
 
-    std::cin>>flag;
-    if(flag==1){
-
-    start_t = clock();
-    //deabtes sections
-    std::vector < char*> indx = {"bill","suspension","estimate","debates","report","vacancy",
-    "election","affirmation","consideration","assembly","absence","hours","address","painting",
-    "personal","appendix","rulings","index"};
-
-    for(int i=0;i<indx.size();i++){
-        
-        query.findDebateName(indx[i]);
-    }
-
-    }else if(flag==2){
-    start_t = clock();
-    std::vector < char*> dname = {"LIQUOR AMENDMENT BILL","FINANCIAL INSTITUTIONS AMENDMENT BILL"};
-
-        int my_rank, p; // process rank and number of processes 
-
-        MPI_Init(&argc, &argv); 
-        MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
-        MPI_Comm_size(MPI_COMM_WORLD, &p);
-
-        DebatesCorrespondingSpeakers(my_rank, p, query,dname);
-        MPI_Finalize(); // shuts down MPI
-
-    }else if(flag==3){
-    start_t = clock();
-    std::vector < char*> sname = {"L. E. D. WINCHESTER","A. J. KOCH","W. T. WEBBER"};
-
-    int my_rank, p; // process rank and number of processes 
-
-        MPI_Init(&argc, &argv); 
-        MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
-        MPI_Comm_size(MPI_COMM_WORLD, &p);
-
-        SpeakerCorrespondingDebates(my_rank, p, query,sname);
-        MPI_Finalize(); // shuts down MPI
-    }
-    //query.SpeakersInDebate(v);
-    //const char *n = "J. L. HORAK";
+    //std::cin>>flag;
     
-    //query.DebatesSpeakerFound(n);
+    int my_rank, p; // process rank and number of processes
+    MPI_Init(&argc, &argv); 
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); 
+    MPI_Comm_size(MPI_COMM_WORLD, &p);
+
+    //std::vector < char*> dname = {"ESTIMATE OF EXPENDITURE, 1979-&#x2019;80.","FIRST READING OF BILLS","EDUCATION AND TRAINING BILL"};
+
+// if(my_rank == 0){
+//     printf("1. Debates in which the following speakers appeared\n");
+//     printf("2. Speakers that participated in these debates\n");
+
+//     std::cin>>flag;
+
+
+// }
+
+// while(fgets (c, 100, fptr) != NULL){
+//         // int n = 0;
+//         // while(c[n] != '\0')n++;
+//         // printf("Data from the file: %s size %d\n", c, n);
+//         dname.push_back(c);
+//         //printf("%15s",dname.at(dname.size() - 1));
+// }
+
+     std::vector < char*> temp = {"EDUCATION AND TRAINING BILL", "INDUSTRIAL CONCILIATION AMENDMENT BILL"};
+    // for(int i = 0; i < temp.size(); i++) printf("what the hack %15s\n", temp.at(i));
+
+    if(flag[0] == '1'){
+        DebatesCorrespondingSpeakers(my_rank, p, query,temp); 
+    }else if(flag[0] == '2'){
+        SpeakerCorrespondingDebates(my_rank, p, query,temp);
+    }
+
+    MPI_Finalize(); // shuts down MPI
 
     end_t = clock();
     total = (double)(end_t - start_t)/CLOCKS_PER_SEC;
