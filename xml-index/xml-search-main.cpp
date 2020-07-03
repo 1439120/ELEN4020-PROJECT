@@ -10,15 +10,20 @@ void SpeakerCorrespondingDebates(int my_rank, int p, HashTable& query, std::vect
 void DebatesCorrespondingSpeakers(int my_rank, int p, HashTable& query, std::vector < char*> sname);
 
 int main(int argc, char* argv[]) {
-
-    const char *small_data = "../data/Hansard-Example.xml";
-    const char *big_data = "../data/SenateHansard1979vol2.xml";
     int flag =0;
+
+    if (argv[1] == NULL)
+    {
+        printf("You must specify an XML file to open when running the program\n", argv[0]);
+        exit(1);
+    }
+
+    const char *fname = argv[1];
 
     clock_t start_t,end_t;
     double total;
 
-    HashTable query(big_data);
+    HashTable query(fname);
 
     //const char *v = "LIQUOR AMENDMENT BILL";
  
