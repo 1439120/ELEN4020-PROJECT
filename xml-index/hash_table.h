@@ -9,7 +9,26 @@ class HashTable: public Debates{
     public:
         HashTable(const char* fname);
         ~HashTable();
-         void findDebateName(char *dname){ 
+       void findDebateName(char *dname){
+            printf("the size is %ld \n",list_.size());
+            size_t n = 0;
+	        while(dname[n] != '\0')n++;
+            int _key = convert(dname, n);
+
+            if(HashMap[_key % debate_.size()].empty()){
+                printf("no matching debate found");
+                return;
+            }
+            for(uint64_t c = 0; c < HashMap[_key % debate_.size()].size(); c++){
+                printf(" %15s \n",HashMap[_key % debate_.size()].at(c).dheading_);
+                printf("-------------------------------------------------------");
+                for (auto& x: HashMap[_key % debate_.size()].at(c).speakers_) {
+                    //std::cout << x.first << ": " << << '\n';
+                    printf("%15s", x.second );
+                }
+                printf("-------------------------------------------------------");
+                printf("\n");
+            }      
         }
 
         void DebatesSpeakerAppears(char* dname); // we need to search through every debate
