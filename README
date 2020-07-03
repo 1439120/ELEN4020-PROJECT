@@ -27,7 +27,7 @@ cd to ELEN4020-LAB3
 
 To build the application: run 'make' on the terminal
 
-To run the program: for word count
+To run the program: index
                      ./xml-search-main
 
 
